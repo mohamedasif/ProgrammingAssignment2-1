@@ -8,8 +8,9 @@
 makeCacheMatrix <- function(x = matrix()) {
   m   <- NULL
   set <- function(y) {
-  x   <<- y
-  m   <<- NULL
+    y
+    x   <<- y
+    m   <<- NULL
   }
   get <- function() x
   setinverse <- function(solve) m <<- solve
@@ -24,12 +25,12 @@ makeCacheMatrix <- function(x = matrix()) {
 ## The cacheSolve function recieves the matrix and check whether the input is same as any of the previous inputs, and if the input is same, the result is retrieved from the cache rather than re calculating to improve the efficiency 
 cacheSolve <- function(x, ...) {
 ## Return a matrix that is the inverse of 
- m <- x$getinverse()
+   m <- x$getinverse()
   if(!is.null(m)){
     message("getting cached data")
     return(m)
   }
-  data <- matrix(x$get())
+  data <- matrix(x$get(),2,2)
   m <- solve(data, ...)
   x$setinverse(m)
   m
